@@ -6,7 +6,7 @@
         </div> 
        
         <div class="w-2/3 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
-          <div class="px-6 py-4 min-h-full">
+          <div class="w-full px-6 py-4 min-h-full">
             <label>
               <span class="text-sm font-semibold text-gray-700">Message</span>
               <textarea v-model="message" v-on:input="sha1" placeholder="Hasing text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
@@ -17,7 +17,7 @@
           </div>
           <div class="px-6 pb-4 pt-2" :class="{'hidden': !hash}">
             <span class="text-sm font-semibold text-gray-700 block">Hash</span>
-            <div class="block bg-gray-200 my-1 rounded w-full py-2 px-3 text-gray-700 leading-tight flex justify-between">
+            <div class="block bg-gray-200 my-1 rounded py-2 px-3 text-gray-700 leading-tight flex justify-between">
 
             <div class="flex justify-between">
               <svg class="h-5 w-5 fill-current" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
