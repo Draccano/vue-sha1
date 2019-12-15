@@ -1,18 +1,39 @@
 <template>
   <div class="hello">
-    <div class="bg-red-500 p-20 text-white">
-        <div class="text-3xl">
+    <div class="p-20 flex items-center justify-center flex-col">
+        <div class="my-4 text-4xl leading-tight xl:text-5xl font-semibold font-display">
           SHA-1 algorithm
         </div> 
-        <div class="my-4">
-          <input v-model="message" v-on:input="sha1" placeholder="Message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
+       
+        <div class="w-1/2 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
+          <div class="px-6 py-4 min-h-full">
+            <label>
+              <span class="text-sm font-semibold text-gray-700">Message</span>
+              <textarea v-model="message" v-on:input="sha1" placeholder="Text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
+            </label>
+          </div>
+          <div class="px-1 block hidden">
+            <button @click="sha1()">Calculate</button>
+          </div>
+          <div class="px-6 pb-4 pt-2" :class="{'hidden': !hash}">
+            <span class="text-sm font-semibold text-gray-700 block">Hash</span>
+            <div class="block bg-gray-200 my-1 rounded w-full py-2 px-3 text-gray-700 leading-tight flex justify-between">
+              <div>
+                {{ hash }}
+              </div>
+              <div>
+                <button @click="clearHash" type="button" class="px-2 text-gray-500 hover:text-gray-600 focus:outline-none">
+                  <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1">
+                      <path fill-rule="evenodd" d="M13.59 12l7.066-7.067a1.123 1.123 0 10-1.589-1.589L12 10.411 4.933 3.344a1.123 1.123 0 10-1.59 1.59L10.412 12l-7.067 7.067a1.123 1.123 0 101.589 1.589L12 13.589l7.067 7.067a1.12 1.12 0 001.59 0c.438-.439.438-1.15 0-1.59L13.588 12z"/>
+                  </svg>  
+                </button>
+              </div>
+              
+            </div>
+            
+          </div>
         </div>
-        <div class="px-1 block hidden">
-          <button @click="sha1()">Calculate</button>
-        </div>
-        <div>
-          <span>{{ hash }}</span>
-        </div>
+      
 
       </div>
   </div>
@@ -168,6 +189,10 @@ export default {
       this.hash = [this.h0, this.h1, this.h2, this.h3, this.h4].map((string) => this.binaryToHex(string)).join('');
     },
 
+    isHash() {
+      return this.hash;
+    },
+
     padZero(num, length) {
       let numArray = num.toString().split('');
       while (numArray.length < length) {
@@ -251,6 +276,11 @@ export default {
       const number = parseInt(hex, 16);
       return (number >>> 0).toString(2); //>>> je shift, cili 0 posuvu doleva
       
+    },
+
+    clearHash() {
+      this.hash = '';
+      this.message = '';
     }
   }
 }
