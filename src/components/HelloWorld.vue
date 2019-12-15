@@ -5,7 +5,7 @@
           SHA-1
         </div> 
        
-        <div class="w-1/2 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
+        <div class="w-2/3 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
           <div class="px-6 py-4 min-h-full">
             <label>
               <span class="text-sm font-semibold text-gray-700">Message</span>
