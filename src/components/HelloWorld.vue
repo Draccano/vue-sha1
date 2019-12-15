@@ -7,10 +7,10 @@
        
         <div class="w-2/3 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
           <div class="w-full px-6 py-4 min-h-full">
-            <label>
+           
               <span class="text-sm font-semibold text-gray-700">Message</span>
               <textarea v-model="message" v-on:input="sha1" placeholder="Hasing text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
-            </label>
+           
           </div>
           <div class="px-1 block hidden">
             <button @click="sha1()">Calculate</button>
