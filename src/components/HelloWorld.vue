@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
-    <div class="p-20 flex items-center justify-center flex-col">
+    <div class="py-20 px-4 md:px-8 lg:px-12 xl:px-20 flex items-center justify-center flex-col">
         <div class="my-4 text-4xl leading-tight xl:text-5xl font-semibold font-display">
           SHA-1
         </div> 
        
-        <div class="w-2/3 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
+        <div class="bg-white flex flex-col h-auto lg:w-1/2 md:w-2/3 py-4 rounded shadow-lg w-full xl:w-1/2">
           <div class="w-full px-6 py-4 min-h-full">
            
               <span class="text-sm font-semibold text-gray-700">Message</span>
