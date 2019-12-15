@@ -2,14 +2,14 @@
   <div class="hello">
     <div class="p-20 flex items-center justify-center flex-col">
         <div class="my-4 text-4xl leading-tight xl:text-5xl font-semibold font-display">
-          SHA-1 algorithm
+          SHA-1
         </div> 
        
         <div class="w-1/2 h-auto rounded max-w-xl shadow-lg py-4 bg-white flex flex-col">
           <div class="px-6 py-4 min-h-full">
             <label>
               <span class="text-sm font-semibold text-gray-700">Message</span>
-              <textarea v-model="message" v-on:input="sha1" placeholder="Text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
+              <textarea v-model="message" v-on:input="sha1" placeholder="Hasing text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
             </label>
           </div>
           <div class="px-1 block hidden">
@@ -18,16 +18,22 @@
           <div class="px-6 pb-4 pt-2" :class="{'hidden': !hash}">
             <span class="text-sm font-semibold text-gray-700 block">Hash</span>
             <div class="block bg-gray-200 my-1 rounded w-full py-2 px-3 text-gray-700 leading-tight flex justify-between">
-              <div>
+
+            <div class="flex justify-between">
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
+                <path d="M53.43 18.17c-1.106-2.815-3.134-6.876-6.514-10.24-3.368-3.353-7.386-5.322-10.164-6.384a8.323 8.323 0 00-8.83 1.872l-8.13 8.092c-2.41 2.399-3.105 6.09-1.728 9.184.426.96.89 1.899 1.386 2.806L1.606 41.343A2.07 2.07 0 001 42.807v9.11a2.07 2.07 0 002.07 2.07h9.11a2.07 2.07 0 002.07-2.07V48.19h3.727a2.07 2.07 0 002.07-2.07v-3.727h3.727a2.07 2.07 0 100-4.14h-5.797a2.07 2.07 0 00-2.07 2.07v3.726H12.18a2.07 2.07 0 00-2.07 2.07v3.727H5.14v-6.181l18.36-18.36a2.07 2.07 0 00.306-2.537 33.505 33.505 0 01-1.959-3.756 4.12 4.12 0 01.866-4.567l8.13-8.092a4.177 4.177 0 014.43-.939c2.404.919 5.869 2.61 8.722 5.45 2.872 2.858 4.62 6.374 5.58 8.82a4.111 4.111 0 01-.928 4.419l-8.228 8.19a4.17 4.17 0 01-4.557.887 26.873 26.873 0 01-3.726-1.9 2.07 2.07 0 00-2.166 3.528 31.03 31.03 0 004.302 2.196c3.12 1.298 6.68.6 9.068-1.777l8.228-8.19a8.25 8.25 0 001.861-8.867z" fill-rule="nonzero"/>
+              </svg>
+              <div class="pl-3">
                 {{ hash }}
               </div>
-              <div>
-                <button @click="clearHash" type="button" class="px-2 text-gray-500 hover:text-gray-600 focus:outline-none">
-                  <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1">
-                      <path fill-rule="evenodd" d="M13.59 12l7.066-7.067a1.123 1.123 0 10-1.589-1.589L12 10.411 4.933 3.344a1.123 1.123 0 10-1.59 1.59L10.412 12l-7.067 7.067a1.123 1.123 0 101.589 1.589L12 13.589l7.067 7.067a1.12 1.12 0 001.59 0c.438-.439.438-1.15 0-1.59L13.588 12z"/>
-                  </svg>  
-                </button>
-              </div>
+            </div>
+              <div class="flex">
+              <button @click="clearHash" type="button" class="px-2 text-gray-500 hover:text-gray-600 focus:outline-none">
+                <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1">
+                    <path fill-rule="evenodd" d="M13.59 12l7.066-7.067a1.123 1.123 0 10-1.589-1.589L12 10.411 4.933 3.344a1.123 1.123 0 10-1.59 1.59L10.412 12l-7.067 7.067a1.123 1.123 0 101.589 1.589L12 13.589l7.067 7.067a1.12 1.12 0 001.59 0c.438-.439.438-1.15 0-1.59L13.588 12z"/>
+                </svg>  
+              </button>
+            </div>  
               
             </div>
             

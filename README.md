@@ -1,5 +1,6 @@
 # tailwind-vue
-
+Dokumentace [zde](https://tools.ietf.org/html/rfc3174#section-5)
+Inspirace [zde](https://www.movable-type.co.uk/scripts/sha256.html), [zde](https://www.movable-type.co.uk/scripts/sha1.html)
 ## Project setup
 ```
 npm install
