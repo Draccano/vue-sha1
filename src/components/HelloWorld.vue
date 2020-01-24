@@ -6,17 +6,31 @@
         </div> 
        
         <div class="bg-white flex flex-col h-auto lg:w-1/2 md:w-2/3 py-4 rounded shadow-lg w-full xl:w-1/2">
-          <div class="w-full px-6 py-4 min-h-full" :class="{'border-b border-gray-200': hash}">
+          <div class="w-full px-6 py-4 min-h-full"  :class="{'border-b border-gray-200': hash}">
            
-              <span class="text-sm font-semibold text-gray-700">Message</span>
-              <textarea v-model="message" v-on:input="sha1" placeholder="Hasing text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
-           
+              <span class="text-sm font-semibold text-gray-500">Message</span>
+              <textarea v-model="message" placeholder="Hasing text" class="bg-gray-200 h-32 my-1 focus:bg-white appearance-none rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username"></textarea>
+               <button @click="sha1"
+                class="block relative w-full h-12 sm:w-auto sm:inline-block bg-indigo-500 hover:bg-indigo-400 font-semibold text-white px-6 py-2 rounded-lg xl:block"
+                >
+                <div class="w-full h-full py-1">
+                    <span :class="{'hidden':loading}" class="">Vypočítat hash</span>
+                    <div :class="{'hidden': !loading}" class="flex h-full items-center justify-center relative w-full ">
+                    <!-- <b-loading is-full-page="false" active.sync="false" can-cancel="false"></b-loading> -->
+                        <!-- <RingLoader :color="'#ffffff'" /> -->
+                        <div class="flex h-full items-center">
+                        <div class="lds-ring scale"><div></div><div></div><div></div><div></div></div>  
+
+                        </div>
+                    </div>
+                </div>
+                    <!-- <loader></loader> -->
+                
+            </button>
           </div>
-          <div class="px-1 block hidden">
-            <button @click="sha1()">Calculate</button>
-          </div>
+      
           <div class="px-6 pb-4 pt-4" :class="{'hidden': !hash}">
-            <span class="text-sm font-semibold text-gray-700 block">Hash</span>
+            <span class="text-sm font-semibold text-gray-500">Hash</span>
             <div class="block bg-gray-200 my-1 rounded py-2 px-3 text-gray-700 leading-tight flex justify-between">
 
             <div class="flex justify-between">
@@ -28,15 +42,26 @@
               </div>
             </div>
               <div class="flex">
+              <button @click="copyLicense" title="Kopírovat" type="button" class="px-2 text-gray-500 hover:text-gray-600 focus:outline-none">
+                  <svg class="h-5 w-5 fill-current" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
+                      <path d="M39.15 10.341H6.142a5.825 5.825 0 00-5.826 5.825v33.009A5.825 5.825 0 006.142 55H39.15a5.825 5.825 0 005.825-5.825V16.166a5.825 5.825 0 00-5.825-5.825zm1.942 38.834c0 1.072-.87 1.942-1.942 1.942H6.142A1.942 1.942 0 014.2 49.175V16.166c0-1.072.87-1.941 1.942-1.941H39.15c1.072 0 1.942.87 1.942 1.941v33.009z" fill-rule="nonzero"/><path d="M48.858.633h-34.95a5.825 5.825 0 00-5.825 5.825 1.942 1.942 0 103.884 0c0-1.072.869-1.942 1.941-1.942h34.95c1.073 0 1.942.87 1.942 1.942v34.95c0 1.073-.87 1.942-1.942 1.942a1.942 1.942 0 100 3.883 5.825 5.825 0 005.825-5.825V6.458A5.825 5.825 0 0048.858.633z" fill-rule="nonzero"/>
+                  </svg>
+              </button>
               <button @click="clearHash" type="button" class="px-2 text-gray-500 hover:text-gray-600 focus:outline-none">
                 <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" version="1.1">
                     <path fill-rule="evenodd" d="M13.59 12l7.066-7.067a1.123 1.123 0 10-1.589-1.589L12 10.411 4.933 3.344a1.123 1.123 0 10-1.59 1.59L10.412 12l-7.067 7.067a1.123 1.123 0 101.589 1.589L12 13.589l7.067 7.067a1.12 1.12 0 001.59 0c.438-.439.438-1.15 0-1.59L13.588 12z"/>
                 </svg>  
               </button>
             </div>  
-              
+             
             </div>
-            
+             <div class="mt-4">
+                <span class="text-sm font-semibold text-gray-500">Délka výpočtu hashe SHA-1 [sekundy]</span>
+                <div class="border px-2 py-2 rounded-lg">
+                  <div><span class="pr-1 text-gray-700 leading-tight ">Vlastní implementace: </span><span :class="{'text-green-500': myHashTime < libraryHashTime, 'text-red-500': myHashTime > libraryHashTime}">{{myHashTime}} s</span></div>
+                  <div><span class="pr-6 text-gray-700 leading-tight ">Knihovna crypto-js: </span><span :class="{'text-green-500': myHashTime > libraryHashTime, 'text-red-500': myHashTime < libraryHashTime}">{{libraryHashTime}} s</span></div>
+                </div>
+             </div>
           </div>
         </div>
       
@@ -46,6 +71,7 @@
 </template>
 
 <script>
+var CryptoJS = require("crypto-js");
 export default {
   name: 'HelloWorld',
   props: {
@@ -57,22 +83,49 @@ export default {
   data() {
     return {
       message: '',
-      h0: '',
-      h1: '',
-      h2: '',
-      h3: '',
-      h4: '',
-      textAscii: '',
-      byteArray: '',
-      byteString: '',
       blocks: '',
       wordsOfBlocks: '',
       hash: '',
+      myHashTime: 0,
+      libraryHashTime: 0
     }
   },
   methods: {
-    sha1(){
-      
+    copyLicense() {
+        var el = document.createElement('textarea');
+        el.value = this.hash;
+        el.setAttribute('readonly', '');
+        el.style = {position: 'absolute', left: '-9999px'};
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    },
+    sha1() {
+      this.mySha1();
+      this.librarySha1();
+    },
+    getUTF8ArrayFromString(str) {
+      var utf8 = unescape(encodeURIComponent(str));
+
+      var arr = [];
+      for (var i = 0; i < utf8.length; i++) {
+          arr.push(utf8.charCodeAt(i));
+      }
+      return arr
+    },
+
+    librarySha1() {
+      var startTime = performance.now();
+
+      var hash = CryptoJS.SHA1("Message");
+      console.log('library hash', hash); /* eslint-disable-line */
+      var endTime = performance.now();
+      this.libraryHashTime = ((endTime - startTime)/1000).toFixed(10);
+    },
+    
+    mySha1(){
+      var startTime = performance.now();
        //Konstanty podle RFC 3174 standardu
       let h0 = this.padZero(this.hexToBinary('67452301'), 32); //01100111010001010010001100000001
       let h1 = this.padZero(this.hexToBinary('EFCDAB89'), 32); //11101111110011011010101110001001
@@ -80,16 +133,17 @@ export default {
       let h3 = this.padZero(this.hexToBinary('10325476'), 32); //00010000001100100101010001110110
       let h4 = this.padZero(this.hexToBinary('C3D2E1F0'), 32); //00010000001100100101010001110110
       
-      //Vytvoření pole Ascii textu z inputu
-      this.textAscii = this.message.split('').map((letter) =>  letter.charCodeAt(0));
+      //Nez budu zpracovavat jednotlive znaky vstupního textu, je potreba ho prevest z UTF-16 (UNICODE) na UTF-8
+      var utf8Array = this.getUTF8ArrayFromString(this.message);
 
       //doplnění nul do 8 ciferného binárního čísla (prevedeno z dekadickeho)
-      this.byteArray = this.textAscii
+      var utf8ByteArray = utf8Array
         .map((charNum) => charNum.toString(2))
         .map((num) => this.padZero(num, 8));
 
+
       //pole byte hodnot se hodi do jednoho stringu a na konec se prida 1
-      let byteString = this.byteArray.join('') + '1';
+      let byteString = utf8ByteArray.join('') + '1';
 
       // kazdy chunk je potreba aby mel 512 bitu, krome posledniho, ten bude mit 448, aby se nakonec
       // hodila hodnota 64 bitu. Pokud delka byteStringu mod 512 neni 448, pridavej nakonec 0. 
@@ -98,22 +152,21 @@ export default {
       }
 
       // delka retezce pole s binarnimi hodnotami ascii znaku, 
-      const length = this.byteArray.join('').length;
+      const length = utf8ByteArray.join('').length;
       //delka retezce prevedena na bin. cislo
       const binaryLength = length.toString(2);
 
       // maximalni delka retezce sha-1 2^64 - 1, delka se vejde na 64 bitu a pripoji se na konec byteStringu
       byteString += this.padZero(binaryLength, 64);
-      this.byteString = byteString;
 
       // rozdeleni binaryString do bloku po 512 bitech
-      this.blocks = this.chunkSubstr(this.byteString, 512);
+      var blocks = this.chunkSubstr(byteString, 512);
 
       //kazdy blok rodelit 512 bitu rodelit po 16x32 bitech
-      this.wordsOfBlocks = this.blocks.map((block) => this.chunkSubstr(block, 32));
+      var wordsOfBlocks = blocks.map((block) => this.chunkSubstr(block, 32));
 
       // pridani novych slov, z 16 na 80 (32-cifernych), aplikace XOR na vsechna (vybrana 4 slova z bloku)
-      const words80 = this.wordsOfBlocks.map((block) => {
+      const words80 = wordsOfBlocks.map((block) => {
     
         for (let i = 16; i <= 79; i++) {
       
@@ -185,14 +238,16 @@ export default {
         }
 
         //dohromady konstanty a zkraceni na 32 bitu
-        this.h0 = this.truncate(this.binaryAddition(h0, a), 32);
-        this.h1 = this.truncate(this.binaryAddition(h1, b), 32);
-        this.h2 = this.truncate(this.binaryAddition(h2, c), 32);
-        this.h3 = this.truncate(this.binaryAddition(h3, d), 32);
-        this.h4 = this.truncate(this.binaryAddition(h4, e), 32);
+        h0 = this.truncate(this.binaryAddition(h0, a), 32);
+        h1 = this.truncate(this.binaryAddition(h1, b), 32);
+        h2 = this.truncate(this.binaryAddition(h2, c), 32);
+        h3 = this.truncate(this.binaryAddition(h3, d), 32);
+        h4 = this.truncate(this.binaryAddition(h4, e), 32);
       }
       
-      this.hash = [this.h0, this.h1, this.h2, this.h3, this.h4].map((string) => this.binaryToHex(string)).join('');
+      this.hash = [h0, h1, h2, h3, h4].map((string) => this.binaryToHex(string)).join('');
+      var endTime = performance.now();
+      this.myHashTime = ((endTime - startTime)/1000).toFixed(10);
     },
 
     isHash() {
