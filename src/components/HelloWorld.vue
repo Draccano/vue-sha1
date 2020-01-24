@@ -31,7 +31,7 @@
       
           <div class="px-6 pb-4 pt-4" :class="{'hidden': !hash}">
             <span class="text-sm font-semibold text-gray-500">Hash</span>
-            <div class="block bg-gray-200 my-1 rounded py-2 px-3 text-gray-700 leading-tight flex justify-between">
+            <div class="block bg-gray-200 my-1 rounded py-3 px-3 text-gray-700 leading-tight flex justify-between">
 
             <div class="flex justify-between">
               <svg class="h-5 w-5 fill-current" viewBox="0 0 55 55" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
