@@ -118,8 +118,10 @@ export default {
     librarySha1() {
       var startTime = performance.now();
 
-      var hash = CryptoJS.SHA1("Message");
+      var hash = CryptoJS.SHA1(this.message);
+      
       console.log('library hash', hash); /* eslint-disable-line */
+
       var endTime = performance.now();
       this.libraryHashTime = ((endTime - startTime)/1000).toFixed(10);
     },
