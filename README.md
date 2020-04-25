@@ -5,9 +5,9 @@ Just donwload, run script and enjoy sha-1 function.
 - paste a string into input
 - check perfomance, it is compared to crypto-js library
 
-![GitHub Logo](/src/assets/images/example.png)
+![Welcome page](/src/assets/images/example.png)
 
-![GitHub Logo](/src/assets/images/example2.png)
+![Hash & Perfomance test](/src/assets/images/example2.png)
 
 - Documentation of standrd for sha1 function [here](https://tools.ietf.org/html/rfc3174#section-5)
 - [Live preview](https://sha1.netlify.app/)
