@@ -6,10 +6,8 @@ Just donwload, run script and enjoy sha-1 function.
 - check perfomance, it is compared to crypto-js library
 
 ![GitHub Logo](/src/assets/images/example.png)
-Format: ![Welcome page](https://github.com/Draccano/vue-sha1)
 
-![GitHub Logo](/src/assets/images/example1.png)
-Format: ![Hash string](https://github.com/Draccano/vue-sha1)
+![GitHub Logo](/src/assets/images/example2.png)
 
 - Documentation of standrd for sha1 function [here](https://tools.ietf.org/html/rfc3174#section-5)
 - [Live preview](https://sha1.netlify.app/)
