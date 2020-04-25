@@ -5,7 +5,7 @@ Just donwload, run script and enjoy sha-1 function.
 - paste a string into input
 - check perfomance, it is compared to crypto-js library
 
-![GitHub Logo](/src/assets/images/example1.png)
+![GitHub Logo](/src/assets/images/example.png)
 Format: ![Welcome page](https://github.com/Draccano/vue-sha1)
 
 ![GitHub Logo](/src/assets/images/example1.png)
